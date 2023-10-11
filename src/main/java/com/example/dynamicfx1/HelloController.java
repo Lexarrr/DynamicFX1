@@ -28,16 +28,19 @@ public class HelloController {
         File file = fileChooser.showOpenDialog(new Stage());
         String name = String.valueOf(file);
         String s = name.replaceAll("\\\\", "/");
-
+        resFile.setText(s);
 
     }
 
     @FXML
     protected void toWriteWord() throws IOException {
         String ss = resFile.getText();
-        BufferedInputStream bis = new BufferedInputStream(new FileInputStream(ss));
-        String get = String.valueOf(bis.read());
-        get.replace(",", "");
+        BufferedReader br = new BufferedReader(new FileReader(ss));
+        String get;
+        while(br.read()) {
+            get = br.readLine();
+            get.replace(",", "");
+        }
         mainBox.getChildren().add(new Label(get));
 
 
