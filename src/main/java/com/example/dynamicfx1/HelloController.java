@@ -7,7 +7,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
+import java.io.*;
 
 public class HelloController {
     @FXML
@@ -28,16 +28,18 @@ public class HelloController {
         File file = fileChooser.showOpenDialog(new Stage());
         String name = String.valueOf(file);
         String s = name.replaceAll("\\\\", "/");
-        String get = resFile.getText();
-        get.replace(",", "");
-        resFile.setText(s);
+
 
     }
 
     @FXML
-    protected void toWriteWord(){
+    protected void toWriteWord() throws IOException {
         String ss = resFile.getText();
-        mainBox.getChildren().add(new Label(ss));
+        BufferedInputStream bis = new BufferedInputStream(new FileInputStream(ss));
+        String get = String.valueOf(bis.read());
+        get.replace(",", "");
+        mainBox.getChildren().add(new Label(get));
+
 
 
     }
