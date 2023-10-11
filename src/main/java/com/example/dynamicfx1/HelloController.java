@@ -36,11 +36,8 @@ public class HelloController {
     protected void toWriteWord() throws IOException {
         String ss = resFile.getText();
         BufferedReader br = new BufferedReader(new FileReader(ss));
-        String get;
-        while(br.read()) {
-            get = br.readLine();
-            get.replace(",", "");
-        }
+        String get = br.readLine();
+        get.replace(",", "");
         mainBox.getChildren().add(new Label(get));
 
 
